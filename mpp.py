@@ -121,6 +121,9 @@ def transform(w, p_e, v_e, phi, a, b):
     r = np.array([[np.cos(phi), np.sin(phi)], [-np.sin(phi), np.cos(phi)]])
     p = r.dot(p_)
     
+    # ignore points behind view plane
+    p[:, w[:, 0] < 0] = np.nan
+    
     return p.T
 
 
