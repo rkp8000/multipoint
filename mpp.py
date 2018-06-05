@@ -77,7 +77,7 @@ def to_mpp(wires, p_e, v_e, phi, a, b, width=10):
     ax.xaxis.set_visible(False)
     ax.yaxis.set_visible(False)
     
-    return fig, ax
+    return fig, ax, paths_2d
 
 
 def transform(w, p_e, v_e, phi, a, b):
@@ -122,7 +122,7 @@ def transform(w, p_e, v_e, phi, a, b):
     p = r.dot(p_)
     
     # ignore points behind view plane
-    p[:, w[:, 0] < 0] = np.nan
+    p[:, w[:, 0] <= 0] = np.nan
     
     return p.T
 
