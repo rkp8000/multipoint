@@ -105,7 +105,17 @@ def box(
     
     for k, (w, kw) in ws.items():
         w_rotated = w.copy()
-        w_rotated[:, :2] = w[:, :2].dot(rot_mat.T)
+        
+        # shift box to origin
+        w_rotated[:, 0] -= x
+        w_rotated[:, 1] -= y
+        
+        # rotate box
+        w_rotated[:, :2] = w_rotated[:, :2].dot(rot_mat.T)
+        
+        # shift box away from origin
+        w_rotated[:, 0] += x
+        w_rotated[:, 1] += y
         
         ws[k] = [w_rotated, kw]
         
